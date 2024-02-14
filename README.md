@@ -29,9 +29,10 @@
 
 <h2 id="screenshots">Screenshots</h2>
 <!-- Add screenshots here -->
-<img src="iamges/1.jpeg">
-<img src="iamges/2.jpeg">
-<img src="iamges/3.jpeg">
+<img src="images/1.png">
+<img src="images/2.png">
+<img src="images/3.png">
+
 <h2 id="installation">Installation</h2>
 <ol>
     <li>Clone the repository: <code>git clone https://github.com/yourusername/news-app.git</code></li>
