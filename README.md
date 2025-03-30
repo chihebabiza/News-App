@@ -1,47 +1,136 @@
-<h1>News App</h1>
+# InputValidate Library
 
-<p>A simple news application that displays news articles from various categories using the NewsAPI.</p>
+## Overview
 
-<h2>Table of Contents</h2>
-<ul>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#technologies">Technologies</a></li>
-    <li><a href="#screenshots">Screenshots</a></li>
-    <li><a href="#installation">Installation</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#contact">Contact</a></li>
-</ul>
+The `clsInputValidate` library provides a collection of utility functions for validating and reading various types of user input, including numbers (integers, floats, doubles), and dates. It is designed to handle common input validation scenarios, such as ensuring a number falls within a specified range, or checking if a date is valid or falls within a specific range.
 
-<h2 id="features">Features</h2>
-<ul>
-    <li>Display news articles from various categories: General, Business, Sports, Tech, Entertainment, and Science.</li>
-    <li>View detailed information about each news article, including title, description, source, and publication date.</li>
-    <li>Responsive design for mobile and desktop.</li>
-</ul>
+## Features
 
-<h2 id="technologies">Technologies</h2>
-<ul>
-    <li>HTML</li>
-    <li>CSS</li>
-    <li>JavaScript</li>
-    <li>NewsAPI</li>
-</ul>
+- Validate numbers (integer, short, float, double) within a specified range.
+- Validate dates within a specified range.
+- Functionality for reading and validating user input, retrying until valid input is provided.
+- Easy-to-use methods for input error handling, with custom error messages.
 
-<h2 id="screenshots">Screenshots</h2>
-<!-- Add screenshots here -->
-<img src="images/1.png">
-<img src="images/2.png">
-<img src="images/3.png">
+## Requirements
 
-<h2 id="installation">Installation</h2>
-<ol>
-    <li>Clone the repository: <code>git clone https://github.com/chihebabiza/news-app.git</code></li>
-    <li>Navigate to the project directory: <code>cd news-app</code></li>
-    <li>Open <code>index.html</code> in your web browser.</li>
-</ol>
+- C++11 or later (due to the use of `std::numeric_limits` and other modern C++ features).
+- Includes the `String-library` and `Date-library` for handling strings and date operations respectively.
 
-<h2 id="contributing">Contributing</h2>
-<p>For support or questions about the application, please contact <a href="mailto:chihababiza9@gmail.com" target="_blank">chihababiza9@gmail.com</a>.</p>
+## Installation
 
-<h2 id="contact">Contact</h2>
-<p>For any inquiries or collaboration opportunities, feel free to contact me via email at <a href="mailto:chihababiza9@gmail.com" target="_blank">chihababiza9@gmail.com</a> or reach out to me on Instagram <a href="https://www.instagram.com/chiheb_abiza_/" target="_blank">@chiheb_abiza_</a>.</p>
+To use this library in your project, simply include the following header file:
+
+```cpp
+#include "Validator.h"
+```
+
+Make sure the `String-library` and `Date-library` are also included in your project.
+
+## Usage
+
+The `clsInputValidate` class provides several static methods for different types of validation and input reading. Below are the available methods:
+
+### Methods
+
+#### 1. `IsNumberBetween(short Number, short From, short To)`
+- Checks if a given short number is within the specified range (inclusive).
+- **Returns**: `true` if the number is within range, `false` otherwise.
+
+#### 2. `IsNumberBetween(int Number, int From, int To)`
+- Checks if a given integer is within the specified range (inclusive).
+- **Returns**: `true` if the number is within range, `false` otherwise.
+
+#### 3. `IsNumberBetween(float Number, float From, float To)`
+- Checks if a given float number is within the specified range (inclusive).
+- **Returns**: `true` if the number is within range, `false` otherwise.
+
+#### 4. `IsNumberBetween(double Number, double From, double To)`
+- Checks if a given double number is within the specified range (inclusive).
+- **Returns**: `true` if the number is within range, `false` otherwise.
+
+#### 5. `IsDateBetween(clsDate Date, clsDate From, clsDate To)`
+- Checks if a given date falls within the specified date range (inclusive).
+- **Returns**: `true` if the date is within range, `false` otherwise.
+
+#### 6. `ReadIntNumber(string ErrorMessage)`
+- Reads an integer input from the user, retrying until a valid integer is entered.
+- **Returns**: A valid integer.
+- **ErrorMessage**: The error message to display if the input is invalid.
+
+#### 7. `ReadIntNumberBetween(int From, int To, string ErrorMessage)`
+- Reads an integer input from the user, ensuring the number falls within the specified range.
+- **Returns**: A valid integer within the range.
+- **ErrorMessage**: The error message to display if the input is out of range.
+
+#### 8. `ReadDblNumber(string ErrorMessage)`
+- Reads a double input from the user, retrying until a valid double is entered.
+- **Returns**: A valid double.
+- **ErrorMessage**: The error message to display if the input is invalid.
+
+#### 9. `ReadDblNumberBetween(double From, double To, string ErrorMessage)`
+- Reads a double input from the user, ensuring the number falls within the specified range.
+- **Returns**: A valid double within the range.
+- **ErrorMessage**: The error message to display if the input is out of range.
+
+#### 10. `IsValideDate(clsDate Date)`
+- Validates if a given date is valid.
+- **Returns**: `true` if the date is valid, `false` otherwise.
+
+## Example Code
+
+```cpp
+#include "clsInputValidate.h"
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    // Example: Reading an integer between a range
+    int age = clsInputValidate::ReadIntNumberBetween(18, 99, "Age must be between 18 and 99, please try again:");
+
+    // Example: Reading a double between a range
+    double salary = clsInputValidate::ReadDblNumberBetween(1000.0, 100000.0, "Salary must be between 1000 and 100000, please try again:");
+
+    // Example: Checking if a number is in a range
+    if (clsInputValidate::IsNumberBetween(age, 18, 99))
+    {
+        cout << "Valid age." << endl;
+    }
+
+    // Example: Date validation
+    clsDate startDate(2022, 1, 1);
+    clsDate endDate(2022, 12, 31);
+    clsDate userDate(2022, 6, 15);
+
+    if (clsInputValidate::IsDateBetween(userDate, startDate, endDate))
+    {
+        cout << "Date is within range." << endl;
+    }
+    else
+    {
+        cout << "Date is out of range." << endl;
+    }
+
+    return 0;
+}
+```
+
+## Dependencies
+
+- **clsDate**: A class to handle date operations such as date comparison and validation.
+- **clsString**: A class for string operations (if needed for other parts of the project).
+
+Ensure you include the necessary dependencies in your project for the library to work properly.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+If you would like to contribute to this project, feel free to fork the repository, make changes, and submit pull requests. Contributions are always welcome!
+
+## Acknowledgements
+
+- The library is designed to simplify the process of user input validation in C++ applications.
+- Thanks to the C++ standard library for providing `std::cin`, `std::cout`, and other utilities that make input/output operations easier.
